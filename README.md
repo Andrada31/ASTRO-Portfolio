@@ -1,76 +1,101 @@
-# Portfolio
-![OscarHernandez-portfolio](https://github.com/user-attachments/assets/e284a42b-15c5-495c-99c7-ad5c1eb3bbe7)
-![Deploy Status](https://img.shields.io/badge/Deploy-Vercel-black?style=flat&logo=vercel)
+# Andrada Paraczki Portfolio
 
----
+Personal portfolio built with Astro, React, and Tailwind CSS.
 
-[Demo](https://oscarhernandez.vercel.app/)
+## Live Sections
 
-[Astro Themes](https://astro.build/themes/details/dark-minimal/)
+- Home: intro, social links, tech logo wall, skills, and radar chart
+- Projects: highlighted project cards with code and live links
+- Contact: direct reach out section
+- Footer: social links, like button, stack info, and Spotify embed
 
-[ReactBits Showcase](https://www.reactbits.dev/showcase) 
+## Tech Stack
 
-The component `<LetterGlitch \>` was taken from [ReactBits.dev](https://www.reactbits.dev/)
+- Astro 5
+- React 19
+- TypeScript
+- Tailwind CSS
+- Firebase
+- Recharts
+- Lottie React
+- Three.js and OGL
 
-## **Stack**  
-### **Frontend**  
-![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+## Featured Projects
 
-### **Tools**  
-![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
-![Prettier](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black)
-![Canva](https://img.shields.io/badge/Canva-c900c3?logo=canva&logoColor=white)
+- Transfer Learning in Astronomy
+- NEXUS Ecosystem
+- Svgl.app (Contributor)
+- Rifas Velez Web
 
-### **Show your favorite Spotify album (or your own)** ![Spotify](https://img.shields.io/badge/Spotify-06cc1a?logo=spotify&logoColor=white)
-1. Choose your Spotify album
-2. Access the share options
-3. Select 'copy embed code'
-```
-<iframe src="https://open.spotify.com/embed/album/ALBUM_ID" style="border-radius:12px border:0;" class="w-full h-40" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
-4. Insert the embed code on footer.astro
+You can update project cards in src/components/Projects.astro.
 
-That's it!
+## Getting Started
 
-## **Project structure**
-```
-public/
-└── svg/
-src/
-├── Components/
-|    ├── contact.astro
-|    ├── footer.astro
-|    ├── home.astro
-|    ├── logoWall.astro
-|    ├── nav.astro
-|    └── projects.astro
-├── layouts/
-|    └── Layout.astro
-├── React/
-|    ├── LetterGlitch.tsx
-|    ├── LikeButton.tsx
-|    └── SkillsList.tsx
-└── pages/
-     └── index.astro
-```
+1. Clone the repository.
 
-## **Local configuration** 
-1. Clone the repo:  
-```
+```bash
 git clone https://github.com/gothsec/portfolio
-```
-2. Install dependencies:
-```  
-npm install
-```
-3. Start the develpoment server:
-```  
-npm run dev
+cd portfolio
 ```
 
-> **Important Notice:**  
-> This project is licensed under the [MIT License](https://opensource.org/licenses/mit).  
-> According to the license terms, any redistribution (including compiled or modified versions), you **must** retain the original copyright 
-> notice and the full license text. Copyright © 2025 Oscar Hernandez. All rights reserved.
+2. Install dependencies.
+
+```bash
+pnpm install
+```
+
+3. Run the development server.
+
+```bash
+pnpm dev
+```
+
+4. Open http://localhost:4321
+
+## Scripts
+
+```bash
+pnpm dev      # Start dev server
+pnpm build    # Type-check and build for production
+pnpm preview  # Preview production build locally
+```
+
+## Customization
+
+- Personal info and hero section: src/components/Home.astro
+- Project list/cards: src/components/Projects.astro
+- Contact section: src/components/Contact.astro
+- Footer links and Spotify iframe: src/components/Footer.astro
+- Main page composition: src/pages/index.astro
+
+To change the Spotify embed, replace the iframe src in src/components/Footer.astro.
+
+## Project Structure
+
+```text
+public/
+     png/
+     svg/
+     transformer.json
+src/
+     components/
+          Contact.astro
+          Footer.astro
+          Home.astro
+          LogoWall.astro
+          Nav.astro
+          Projects.astro
+     layouts/
+          Layout.astro
+     pages/
+          index.astro
+     React/
+          AstronautCard.tsx
+          DarkVeil.tsx
+          LikeButton.tsx
+          LiquidEther.tsx
+          LottieAnimation.tsx
+          ProjectCard.tsx
+          RadarChartComponent.tsx
+          SkillsList.tsx
+```
