@@ -1,0 +1,246 @@
+---
+const navItems = [
+  {
+    label: "Home",
+    href: "#home",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z"></path></svg>`,
+  },
+  {
+    label: "Projects",
+    href: "#projects",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4 5V19H20V7H11.5858L9.58579 5H4ZM12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z"></path></svg>`,
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21.7267 2.95694L16.2734 22.0432C16.1225 22.5716 15.7979 22.5956 15.5563 22.1126L11 13L1.9229 9.36919C1.41322 9.16532 1.41953 8.86022 1.95695 8.68108L21.0432 2.31901C21.5716 2.14285 21.8747 2.43866 21.7267 2.95694ZM19.0353 5.09647L6.81221 9.17085L12.4488 11.4255L15.4895 17.5068L19.0353 5.09647Z"></path></svg>`,
+  },
+];
+---
+
+<div class="flex justify-center w-full">
+  <nav
+    id="main-nav"
+    class="bg-transparent fixed left-1/2 -translate-x-1/2 z-[100] backdrop-blur-xl transition-all duration-500 ease-in-out md:top-6 md:bottom-auto bottom-4 floating-dock-nav"
+  >
+    <div
+      class="container mx-auto flex justify-center items-center md:flex-col md:items-center md:justify-center"
+    >
+      <ul
+        class="hidden md:flex items-end gap-4 px-4 pb-3 pt-4 h-16 md:flex-col"
+      >
+        {
+          navItems.map((item) => (
+            <li class="nav-item">
+              <a
+                href={item.href}
+                class="nav-link flex flex-col items-center justify-center relative rounded-full bg-gray-200 dark:bg-neutral-800 transition-all duration-300 hover:scale-110"
+                data-title={item.label}
+              >
+                <div class="nav-tooltip absolute left-full -translate-y-1/2 ml-2 px-2 py-1 bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-md text-xs whitespace-nowrap text-neutral-700 dark:text-white opacity-0 pointer-events-none transition-all duration-200 md:block hidden">
+                  {item.label}
+                </div>
+                <span class="nav-icon flex items-center justify-center text-neutral-600 dark:text-neutral-300">
+                  <Fragment set:html={item.icon} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Mobile Navigation -->
+      <ul class="flex md:hidden w-full justify-between px-6 py-3 gap-4">
+        {
+          navItems.map((item) => (
+            <li class="flex-1">
+              <a
+                href={item.href}
+                class="nav-link-mobile flex flex-col items-center gap-1 text-neutral-600 dark:text-neutral-300 transition-colors text-xs relative group"
+              >
+                <div class="nav-indicator absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full transition-all duration-300 scale-0 opacity-0" />
+                <span class="flex items-center justify-center w-6 h-6">
+                  <Fragment set:html={item.icon} />
+                </span>
+                <span class="text-xs">{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<style>
+  .floating-dock-nav {
+    background: #121212;
+    border: 1px solid #2b2b2b;
+    border-radius: 9999px;
+    /* transform: translateX(-50%); */
+    transition:
+      width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+      background 0.3s,
+      border-color 0.3s,
+      border-radius 0.3s,
+      backdrop-filter 0.3s,
+      transform 0.3s;
+  }
+
+  .dark .floating-dock-nav {
+    background: transparent;
+    border-color: rgba(64, 64, 64, 0.3);
+  }
+
+  .floating-dock-nav.scrolling {
+    background: transparent;
+    border-color: rgba(229, 231, 235, 0.5);
+    border-radius: 9999px;
+    backdrop-filter: blur(20px);
+  }
+
+  .dark .floating-dock-nav.scrolling {
+    background: transparent;
+    border-color: rgba(64, 64, 64, 0.5);
+  }
+
+  /* Desktop Navigation Styles */
+  @media (min-width: 768px) {
+    .floating-dock-nav {
+      width: 72px;
+      left: 1.5rem;
+      top: 40%;
+      bottom: auto;
+      transform: translateY(-50%);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 220px;
+      min-height: 220px;
+      padding: 1.5rem 0;
+      backdrop-filter: blur(20px);
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-link:hover {
+      width: 60px;
+      height: 60px;
+    }
+    .nav-link:hover .nav-icon {
+      transform: scale(1.2);
+    }
+    .nav-link:hover .nav-tooltip {
+      opacity: 1;
+      transform: none;
+    }
+    .nav-link.active {
+      background: white;
+      border: 1px solid #121212;
+    }
+    .nav-link.active .nav-icon {
+      color: #121212;
+    }
+  }
+
+  /* Mobile Navigation Styles */
+  @media (max-width: 767px) {
+    .floating-dock-nav {
+      width: calc(100% - 2rem);
+      bottom: 1rem;
+      border-radius: 1.5rem;
+    }
+
+    .floating-dock-nav.scrolling {
+      border-radius: 1.5rem;
+    }
+
+    .nav-link-mobile.active .nav-indicator {
+      transform: translateY(-50%) scale(1);
+      opacity: 1;
+    }
+
+    .nav-link-mobile.active {
+      color: #7359b2 !important;
+    }
+
+    body {
+      padding-bottom: 100px;
+    }
+  }
+
+  .nav-icon {
+    transition: all 0.3s ease;
+  }
+</style>
+
+<script>
+  const nav = document.getElementById("main-nav");
+  const maxScroll = 1000;
+  let rafId = null;
+
+  function updateNav() {
+    if (window.scrollY > 0) {
+      nav?.classList.add("scrolling");
+    } else {
+      nav?.classList.remove("scrolling");
+    }
+    rafId = null;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateNav);
+      }
+    },
+    { passive: true }
+  );
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = e.currentTarget as HTMLAnchorElement;
+      const targetId = target.getAttribute("href")?.substring(1) || "";
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  // Active section detection
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("nav a[href^='#']");
+    const observerOptions = { threshold: 0.2 };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => link.classList.remove("active"));
+          const id = entry.target.getAttribute("id");
+          const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+    sections.forEach((section) => observer.observe(section));
+  });
+</script>
