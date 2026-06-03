@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { doc, onSnapshot, updateDoc, increment } from "firebase/firestore";
+import {
+  doc,
+  onSnapshot,
+  updateDoc,
+  increment,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 const LikeButton = () => {
@@ -18,16 +24,21 @@ const LikeButton = () => {
       setIsLiked(storedIsLiked === "true");
     }
 
-    // Listen for realtime updates from Firestore
+    // Listen for realtime updates from Firestore and ensure counter exists
     const likeDocRef = doc(db, "likes", "counter");
-    const unsubscribe = onSnapshot(likeDocRef, (docSnap) => {
+    const unsubscribe = onSnapshot(likeDocRef, async (docSnap) => {
       if (docSnap.exists()) {
         const currentLikes = docSnap.data().likes;
         setLikes(Math.max(0, currentLikes));
         setAnimateLikes(true);
         setTimeout(() => setAnimateLikes(false), 300);
       } else {
-        console.log("Document does not exist.");
+        // If the document doesn't exist yet, create it with 0 likes
+        try {
+          await setDoc(likeDocRef, { likes: 0 });
+        } catch (e) {
+          console.error("Failed to create likes counter document:", e);
+        }
       }
     });
 
