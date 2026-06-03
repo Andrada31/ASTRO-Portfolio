@@ -128,13 +128,6 @@ const navItems = [
       height: 40px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .nav-link:hover {
-      width: 60px;
-      height: 60px;
-    }
-    .nav-link:hover .nav-icon {
-      transform: scale(1.2);
-    }
     .nav-link:hover .nav-tooltip {
       opacity: 1;
       transform: none;
@@ -200,7 +193,7 @@ const navItems = [
         rafId = requestAnimationFrame(updateNav);
       }
     },
-    { passive: true }
+    { passive: true },
   );
 
   // Smooth scrolling for anchor links
@@ -239,7 +232,7 @@ const navItems = [
 
     const observer = new IntersectionObserver(
       observerCallback,
-      observerOptions
+      observerOptions,
     );
     sections.forEach((section) => observer.observe(section));
   });
