@@ -1,4 +1,4 @@
-# Andrada Paraczki Portfolio
+# ASTRO Portfolio
 
 Personal portfolio built with Astro, React, and Tailwind CSS.
 
