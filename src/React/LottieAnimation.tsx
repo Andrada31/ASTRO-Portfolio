@@ -11,7 +11,7 @@ interface LottieAnimationProps {
 }
 
 const LottieAnimation: React.FC<LottieAnimationProps> = ({
-  path = "/transformer.json",
+  path = "/ASTRO-Portfolio/transformer.json",
   width = 290,
   height = 290,
   loop = true,
