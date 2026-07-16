@@ -66,6 +66,15 @@ const projects: Project[] = [
           media={[
             { type: 'video', url: '/videos/transfer-learning.mp4' }
           ]}
+          overview="My Bachelor's Thesis explores how Transfer Learning can help in the training of pretrained CNN models (VGG16, ResNet50, EfficientNet) for classification, and YOLO object detection algorithms (YOLOv8-c and YOLOv11n) to classify and detect deep space objects (DSOs). The web interface allows users to run live inference on telescope imagery, visualize activation maps using Grad-CAM, and compare model performances."
+          techStack={[
+            { name: 'Python', icon: '/svg/python.svg' },
+            { name: 'TensorFlow', icon: '/svg/TensorFlow.svg' },
+            { name: 'PyTorch', icon: '/svg/PyTorch.svg' },
+            { name: 'React', icon: '/svg/react.svg' },
+            { name: 'TailwindCSS', icon: '/svg/tailwindcss.svg' },
+            { name: 'Vite', icon: '/svg/vite.svg' }
+          ]}
         />
       </div>
       <div class="flex justify-center md:justify-start">
@@ -80,6 +89,15 @@ const projects: Project[] = [
           media={[
             { type: 'video', url: '/videos/nexus.mp4' }
           ]}
+          overview="NEXUS Ecosystem is a submission management platform featuring JSON-defined dynamic forms, granular group-based authorization, configurable workflows, status history, and external institutional integrations (Webcon BPS). The architecture relies on a robust Backend (NestJS) for access rules and validations, a dynamic Frontend (Next.js & React) for user interactions, and PostgreSQL as the single source of truth for relational data and JSONB responses."
+          techStack={[
+            { name: 'Next.js', icon: '/svg/next.svg' },
+            { name: 'React', icon: '/svg/react.svg' },
+            { name: 'TypeScript', icon: '/svg/typeScript.svg' },
+            { name: 'Node.js', icon: '/svg/nodejs.svg' },
+            { name: 'Tailwind CSS', icon: '/svg/tailwindcss.svg' },
+            { name: 'Docker', icon: '/svg/docker.svg' }
+          ]}
         />
       </div>
       <div class="flex justify-center md:justify-start">
@@ -87,10 +105,21 @@ const projects: Project[] = [
           client:load
           text_m="Blackboard"
           text_s="In progress.."
-          image="/png/blackboard.png"
+          image="/png/b1.png"
           logo="/svg/next.svg"
           codeLink="https://github.com/Andrada31/Blackboard"
           externalLink="#"
+          media={[
+            { type: 'video', url: '/videos/blackboard.mp4' }
+          ]}
+          overview="A modern, digital drawing application. Features include multi-layer support with visibility and opacity controls, drawing tools (pencil, eraser, shapes, text, fill), and an intuitive floating toolbar interface. State is managed via React Context API, using HTML5 Canvas API for real-time drawing operations."
+          techStack={[
+            { name: 'Next.js', icon: '/svg/next.svg' },
+            { name: 'React', icon: '/svg/react.svg' },
+            { name: 'TypeScript', icon: '/svg/typeScript.svg' },
+            { name: 'Tailwind CSS', icon: '/svg/tailwindcss.svg' },
+            { name: 'HTML5', icon: '/svg/HTML5.svg' }
+          ]}
         />
       </div>
       <div class="flex justify-center md:justify-start">
@@ -104,6 +133,12 @@ const projects: Project[] = [
           externalLink="#"
           media={[
             { type: 'video', url: '/videos/japan-parallax.mp4' }
+          ]}
+          overview="A visually stunning showcase website demonstrating advanced CSS and JavaScript parallax scrolling techniques, beautifully themed around Japanese culture and landscapes."
+          techStack={[
+            { name: 'HTML5', icon: '/svg/HTML5.svg' },
+            { name: 'CSS3', icon: '/svg/CSS3.svg' },
+            { name: 'JavaScript', icon: '/svg/javaScript.svg' }
           ]}
         />
       </div>

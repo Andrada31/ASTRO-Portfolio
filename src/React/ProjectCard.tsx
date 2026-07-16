@@ -8,6 +8,8 @@ interface ProjectCardProps {
   codeLink: string;
   externalLink: string;
   media?: { type: "image" | "video" | "iframe"; url: string }[];
+  overview?: string;
+  techStack?: { name: string; icon: string }[];
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -18,6 +20,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   codeLink,
   externalLink,
   media,
+  overview,
+  techStack,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -264,25 +268,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 </svg>
               </button>
             </div>
-            <div className="p-4 overflow-y-auto flex-grow flex flex-col items-center" style={{ scrollbarWidth: 'thin', scrollbarColor: '#333 #111' }}>
+            <div className="overflow-y-auto flex-grow flex flex-col relative" style={{ scrollbarWidth: 'thin', scrollbarColor: '#333 #111' }}>
               {media && media.length > 0 ? (
-                <div className="flex flex-col gap-6 w-full">
+                <div className="sticky top-0 z-20 bg-[#111] p-4 border-b border-[#333] shadow-lg flex flex-col gap-4 items-center w-full">
                   {media.map((m, i) => {
                     if (m.type === "video") {
-                      return <video key={i} src={m.url} controls autoPlay muted className="w-full rounded-lg shadow-lg border border-[#333]" />;
+                      return <video key={i} src={m.url} controls autoPlay muted className="w-full max-h-[50vh] object-contain rounded-lg shadow-lg border border-[#333] bg-black" />;
                     }
                     if (m.type === "iframe") {
                       return (
                         <iframe 
                           key={i} 
                           src={m.url} 
-                          className="w-full aspect-video rounded-lg shadow-lg border border-[#333]"
+                          className="w-full max-h-[50vh] aspect-video rounded-lg shadow-lg border border-[#333] bg-black"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                           allowFullScreen 
                         />
                       );
                     }
-                    return <img key={i} src={m.url} alt={`${text_m} media ${i + 1}`} className="w-full rounded-lg shadow-lg border border-[#333]" />;
+                    return <img key={i} src={m.url} alt={`${text_m} media ${i + 1}`} className="w-full max-h-[50vh] object-contain rounded-lg shadow-lg border border-[#333] bg-black" />;
                   })}
                 </div>
               ) : (
@@ -294,6 +298,43 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   <p className="text-sm mt-2 opacity-70">Aici poți adăuga imagini sau un video.</p>
                 </div>
               )}
+
+              {/* Overview & Tech Stack */}
+              <div className="p-4 md:p-6 w-full flex-grow">
+                {(overview || (techStack && techStack.length > 0)) && (
+                  <div className="w-full flex flex-col gap-6 text-left">
+                    {overview && (
+                      <div className="bg-[#1a1a1a] p-6 border border-[#333] rounded-xl shadow-inner">
+                        <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[var(--sec)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                          Overview
+                        </h4>
+                        <p className="text-[#a1a1aa] leading-relaxed text-sm md:text-base">{overview}</p>
+                      </div>
+                    )}
+                    {techStack && techStack.length > 0 && (
+                      <div className="bg-[#1a1a1a] p-6 border border-[#333] rounded-xl shadow-inner">
+                        <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[var(--sec)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                          </svg>
+                          Tech Stack
+                        </h4>
+                        <div className="flex flex-wrap gap-3">
+                          {techStack.map((tech, i) => (
+                            <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#222] border border-[#444] rounded-lg transition-transform hover:-translate-y-1 hover:border-[var(--sec)] group">
+                              <img src={tech.icon} alt={tech.name} className="w-5 h-5 object-contain group-hover:scale-110 transition-transform" />
+                              <span className="text-sm font-medium text-[#e4e4e7]">{tech.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
