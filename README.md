@@ -34,7 +34,7 @@ You can update project cards in src/components/Projects.astro.
 1. Clone the repository.
 
 ```bash
-git clone https://github.com/gothsec/portfolio
+git clone https://github.com/Andrada31/portfolio
 cd portfolio
 ```
 
