@@ -131,6 +131,7 @@ export default function LiquidEther({
       delta = 0;
       container: HTMLElement | null = null;
       renderer: THREE.WebGLRenderer | null = null;
+      // @ts-ignore
       clock: THREE.Clock | null = null;
       init(container: HTMLElement) {
         this.container = container;
@@ -149,6 +150,7 @@ export default function LiquidEther({
         el.style.width = "100%";
         el.style.height = "100%";
         el.style.display = "block";
+        // @ts-ignore
         this.clock = new THREE.Clock();
         this.clock.start();
       }

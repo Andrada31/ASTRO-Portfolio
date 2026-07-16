@@ -174,7 +174,6 @@ const navItems = [
 
 <script>
   const nav = document.getElementById("main-nav");
-  const maxScroll = 1000;
   let rafId = null;
 
   function updateNav() {
@@ -217,7 +216,7 @@ const navItems = [
     const navLinks = document.querySelectorAll("nav a[href^='#']");
     const observerOptions = { threshold: 0.2 };
 
-    const observerCallback = (entries) => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navLinks.forEach((link) => link.classList.remove("active"));

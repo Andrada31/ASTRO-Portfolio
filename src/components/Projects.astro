@@ -1,46 +1,8 @@
 ---
-import svgl from "../../public/png/s5.png";
-import placeholder from "../../public/png/placeholder.png";
+
 import ProjectCard from "@/React/ProjectCard";
 
-interface Project {
-  title: string;
-  image: ImageMetadata;
-  link: string;
-  preview: string;
-  status: string;
-}
 
-const projects: Project[] = [
-  {
-    title: "MoviesForDevs",
-    image: placeholder as ImageMetadata,
-    link: "https://github.com/gothsec/MoviesForDevs",
-    preview: "https://movies-for-devs.vercel.app",
-    status: "Deployed",
-  },
-  {
-    title: "StockIn",
-    image: placeholder as ImageMetadata,
-    link: "https://github.com/gothsec/stockin-demo",
-    preview: "https://stockin-demo.vercel.app",
-    status: "On Development",
-  },
-  {
-    title: "Svgl.app",
-    image: svgl as ImageMetadata,
-    link: "https://github.com/pheralb/svgl",
-    preview: "https://svgl.app",
-    status: "Contributor",
-  },
-  {
-    title: "Rifas Velez Web",
-    image: placeholder as ImageMetadata,
-    link: "https://github.com/Buga-Software/rifasvelez-web",
-    preview: "https://www.rifasvelez.com",
-    status: "Deployed",
-  },
-];
 ---
 
 <section
