@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 interface ProjectCardProps {
   text_m: string;
   text_s: string;
@@ -5,6 +7,7 @@ interface ProjectCardProps {
   logo?: string;
   codeLink: string;
   externalLink: string;
+  media?: { type: "image" | "video" | "iframe"; url: string }[];
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -14,7 +17,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   logo,
   codeLink,
   externalLink,
+  media,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const handleNavClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('#main-nav')) {
+          setIsModalOpen(false);
+        }
+      };
+      document.addEventListener('click', handleNavClick);
+      return () => document.removeEventListener('click', handleNavClick);
+    }
+  }, [isModalOpen]);
+
+  const openModal = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <style>{`
@@ -145,7 +172,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="flex flex-col items-start justify-start pb-4">
         <div className="main relative">
           <div className="card">
-            <a href={externalLink} target="_blank" rel="noopener noreferrer">
+            <a href="#" onClick={openModal}>
               <img src={image} alt="Project" />
             </a>
             <div className="card_content">
@@ -215,6 +242,62 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
+          onClick={closeModal}
+        >
+          <div 
+            className="relative w-full max-w-4xl max-h-[90vh] bg-[#111] border border-[#333] rounded-xl shadow-2xl overflow-hidden flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center p-4 border-b border-[#333]">
+              <h3 className="text-white font-bold">{text_m}</h3>
+              <button 
+                className="text-gray-400 hover:text-white transition-colors" 
+                onClick={closeModal}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto flex-grow flex flex-col items-center" style={{ scrollbarWidth: 'thin', scrollbarColor: '#333 #111' }}>
+              {media && media.length > 0 ? (
+                <div className="flex flex-col gap-6 w-full">
+                  {media.map((m, i) => {
+                    if (m.type === "video") {
+                      return <video key={i} src={m.url} controls autoPlay muted className="w-full rounded-lg shadow-lg border border-[#333]" />;
+                    }
+                    if (m.type === "iframe") {
+                      return (
+                        <iframe 
+                          key={i} 
+                          src={m.url} 
+                          className="w-full aspect-video rounded-lg shadow-lg border border-[#333]"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowFullScreen 
+                        />
+                      );
+                    }
+                    return <img key={i} src={m.url} alt={`${text_m} media ${i + 1}`} className="w-full rounded-lg shadow-lg border border-[#333]" />;
+                  })}
+                </div>
+              ) : (
+                <div className="text-gray-500 py-20 text-center flex flex-col items-center">
+                  <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <p className="text-lg">Media soon.</p>
+                  <p className="text-sm mt-2 opacity-70">Aici poți adăuga imagini sau un video.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
