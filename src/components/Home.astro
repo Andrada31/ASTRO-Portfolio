@@ -33,7 +33,7 @@ import RadarChartComponent from "../React/RadarChartComponent.tsx";
             target="_blank"
             href="https://github.com/Andrada31"
             aria-label="GitHub"
-            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out p-3 rounded-xl bg-[var(--surface-2)] hover:bg-[var(--surface-3)]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ import RadarChartComponent from "../React/RadarChartComponent.tsx";
             target="_blank"
             href="https://www.kaggle.com/andradaparaczki"
             aria-label="Kaggle"
-            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)] group"
+            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out p-3 rounded-xl bg-[var(--surface-2)] hover:bg-[var(--surface-3)] group"
           >
             <span
               class="block size-8 bg-[var(--white-icon)] group-hover:bg-white"
@@ -61,7 +61,7 @@ import RadarChartComponent from "../React/RadarChartComponent.tsx";
             target="_blank"
             href="https://www.linkedin.com/in/andradaparaczki31"
             aria-label="LinkedIn"
-            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out p-3 rounded-xl bg-[var(--surface-2)] hover:bg-[var(--surface-3)]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ import RadarChartComponent from "../React/RadarChartComponent.tsx";
             target="_blank"
             href="https://mail.google.com/mail/?view=cm&fs=1&to=paraczkiandrada31@gmail.com&su=Hey%20Andrada!"
             aria-label="Email"
-            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+            class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out p-3 rounded-xl bg-[var(--surface-2)] hover:bg-[var(--surface-3)]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,9 +99,9 @@ import RadarChartComponent from "../React/RadarChartComponent.tsx";
     <!-- Technologies -->
     <LogoWall />
     <div class="flex flex-col lg:flex-row items-center gap-12">
-      <SkillsList client:load />
+      <SkillsList client:visible />
       <div class="w-full h-[320px] md:h-[450px] pt-20">
-        <RadarChartComponent client:load />
+        <RadarChartComponent client:visible />
       </div>
     </div>
   </div>

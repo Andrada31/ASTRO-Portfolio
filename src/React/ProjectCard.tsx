@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { AnimatePresence, m } from "framer-motion";
+import MotionProvider from "./MotionProvider";
+
+const easeOut = [0.22, 1, 0.36, 1] as const;
 
 interface ProjectCardProps {
   text_m: string;
@@ -29,12 +33,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     if (isModalOpen) {
       const handleNavClick = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (target.closest('#main-nav')) {
+        if (target.closest("#main-nav")) {
           setIsModalOpen(false);
         }
       };
-      document.addEventListener('click', handleNavClick);
-      return () => document.removeEventListener('click', handleNavClick);
+      document.addEventListener("click", handleNavClick);
+      return () => document.removeEventListener("click", handleNavClick);
     }
   }, [isModalOpen]);
 
@@ -47,14 +51,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     setIsModalOpen(false);
   };
   return (
-    <>
+    <MotionProvider>
       <style>{`
         .card {
           width: 30em;
           height: 18em;
-          background-color: #111;
+          background-color: var(--surface-1);
           padding: 20px;
-          border: 1px solid #333;
           border-radius: 20px;
           cursor: pointer;
           overflow: hidden;
@@ -103,9 +106,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           position: absolute;
           width: 29em;
           height: 8em;
-          background: linear-gradient(180deg, #1b1b1b, #0d0d0d);
+          background: var(--surface-2);
           border-radius: 7px;
-          border: 1px solid #333;
           margin-top: -11em;
           transition: .2s ease-in-out;
           z-index: -1;
@@ -139,7 +141,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           justify-content: center;
           flex-direction: column;
           margin-left: 0.5em;
-          font-family: Montserrat;
           color: white;
         }
         .text_m {
@@ -173,11 +174,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           left: 0.5em;
         }
       `}</style>
-      <div className="flex flex-col items-start justify-start pb-4">
+      <m.div
+        className="flex flex-col items-start justify-start pb-4"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, ease: easeOut }}
+      >
         <div className="main relative">
           <div className="card">
             <a href="#" onClick={openModal}>
-              <img src={image} alt="Project" />
+              <img src={image} alt="Project" loading="lazy" decoding="async" />
             </a>
             <div className="card_content">
               <label className="switch_738">
@@ -192,6 +199,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 <img
                   src={logo}
                   alt="Logo"
+                  loading="lazy"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -245,101 +253,187 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </m.div>
 
       {/* Modal */}
-      {isModalOpen && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" 
-          onClick={closeModal}
-        >
-          <div 
-            className="relative w-full max-w-4xl max-h-[90vh] bg-[#111] border border-[#333] rounded-xl shadow-2xl overflow-hidden flex flex-col"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {isModalOpen && (
+          <m.div
+            key="modal"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={closeModal}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="flex justify-between items-center p-4 border-b border-[#333]">
-              <h3 className="text-white font-bold">{text_m}</h3>
-              <button 
-                className="text-gray-400 hover:text-white transition-colors" 
-                onClick={closeModal}
+            <m.div
+              className="relative w-full max-w-4xl max-h-[90vh] bg-[var(--surface-1)] rounded-xl overflow-hidden flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.97 }}
+              transition={{ duration: 0.3, ease: easeOut }}
+            >
+              <div className="flex justify-between items-center p-4">
+                <h3 className="text-white font-bold">{text_m}</h3>
+                <button
+                  className="text-gray-400 hover:text-white transition-colors"
+                  onClick={closeModal}
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div
+                className="overflow-y-auto flex-grow flex flex-col relative"
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "var(--surface-3) transparent",
+                }}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
-            <div className="overflow-y-auto flex-grow flex flex-col relative" style={{ scrollbarWidth: 'thin', scrollbarColor: '#333 #111' }}>
-              {media && media.length > 0 ? (
-                <div className="sticky top-0 z-20 bg-[#111] p-4 border-b border-[#333] shadow-lg flex flex-col gap-4 items-center w-full">
-                  {media.map((m, i) => {
-                    if (m.type === "video") {
-                      return <video key={i} src={m.url} controls autoPlay muted className="w-full max-h-[50vh] object-contain rounded-lg shadow-lg border border-[#333] bg-black" />;
-                    }
-                    if (m.type === "iframe") {
+                {media && media.length > 0 ? (
+                  <div className="sticky top-0 z-20 bg-[var(--surface-1)] p-4 flex flex-col gap-4 items-center w-full">
+                    {media.map((item, i) => {
+                      if (item.type === "video") {
+                        return (
+                          <video
+                            key={i}
+                            src={item.url}
+                            controls
+                            autoPlay
+                            muted
+                            className="w-full max-h-[50vh] object-contain rounded-lg bg-black"
+                          />
+                        );
+                      }
+                      if (item.type === "iframe") {
+                        return (
+                          <iframe
+                            key={i}
+                            src={item.url}
+                            className="w-full max-h-[50vh] aspect-video rounded-lg bg-black"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        );
+                      }
                       return (
-                        <iframe 
-                          key={i} 
-                          src={m.url} 
-                          className="w-full max-h-[50vh] aspect-video rounded-lg shadow-lg border border-[#333] bg-black"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                          allowFullScreen 
+                        <img
+                          key={i}
+                          src={item.url}
+                          alt={`${text_m} media ${i + 1}`}
+                          className="w-full max-h-[50vh] object-contain rounded-lg bg-black"
                         />
                       );
-                    }
-                    return <img key={i} src={m.url} alt={`${text_m} media ${i + 1}`} className="w-full max-h-[50vh] object-contain rounded-lg shadow-lg border border-[#333] bg-black" />;
-                  })}
-                </div>
-              ) : (
-                <div className="text-gray-500 py-20 text-center flex flex-col items-center">
-                  <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                  <p className="text-lg">Media soon.</p>
-                  <p className="text-sm mt-2 opacity-70">Aici poți adăuga imagini sau un video.</p>
-                </div>
-              )}
-
-              {/* Overview & Tech Stack */}
-              <div className="p-4 md:p-6 w-full flex-grow">
-                {(overview || (techStack && techStack.length > 0)) && (
-                  <div className="w-full flex flex-col gap-6 text-left">
-                    {overview && (
-                      <div className="bg-[#1a1a1a] p-6 border border-[#333] rounded-xl shadow-inner">
-                        <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                          <svg className="w-5 h-5 text-[var(--sec)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                          </svg>
-                          Overview
-                        </h4>
-                        <p className="text-[#a1a1aa] leading-relaxed text-sm md:text-base">{overview}</p>
-                      </div>
-                    )}
-                    {techStack && techStack.length > 0 && (
-                      <div className="bg-[#1a1a1a] p-6 border border-[#333] rounded-xl shadow-inner">
-                        <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                          <svg className="w-5 h-5 text-[var(--sec)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                          </svg>
-                          Tech Stack
-                        </h4>
-                        <div className="flex flex-wrap gap-3">
-                          {techStack.map((tech, i) => (
-                            <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#222] border border-[#444] rounded-lg transition-transform hover:-translate-y-1 hover:border-[var(--sec)] group">
-                              <img src={tech.icon} alt={tech.name} className="w-5 h-5 object-contain group-hover:scale-110 transition-transform" />
-                              <span className="text-sm font-medium text-[#e4e4e7]">{tech.name}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                    })}
+                  </div>
+                ) : (
+                  <div className="text-gray-500 py-20 text-center flex flex-col items-center">
+                    <svg
+                      className="w-16 h-16 mb-4 opacity-50"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                    <p className="text-lg">Media soon.</p>
+                    <p className="text-sm mt-2 opacity-70">
+                      Aici poți adăuga imagini sau un video.
+                    </p>
                   </div>
                 )}
+
+                {/* Overview & Tech Stack */}
+                <div className="p-4 md:p-6 w-full flex-grow">
+                  {(overview || (techStack && techStack.length > 0)) && (
+                    <div className="w-full flex flex-col gap-6 text-left">
+                      {overview && (
+                        <div className="bg-[var(--surface-2)] p-6 rounded-xl">
+                          <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                            <svg
+                              className="w-5 h-5 text-[var(--sec)]"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              ></path>
+                            </svg>
+                            Overview
+                          </h4>
+                          <p className="text-[#a1a1aa] leading-relaxed text-sm md:text-base">
+                            {overview}
+                          </p>
+                        </div>
+                      )}
+                      {techStack && techStack.length > 0 && (
+                        <div className="bg-[var(--surface-2)] p-6 rounded-xl">
+                          <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <svg
+                              className="w-5 h-5 text-[var(--sec)]"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                              ></path>
+                            </svg>
+                            Tech Stack
+                          </h4>
+                          <div className="flex flex-wrap gap-3">
+                            {techStack.map((tech, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center gap-2 px-3 py-2 bg-[var(--surface-3)] rounded-lg transition hover:-translate-y-1 hover:bg-[var(--accent)] group"
+                              >
+                                <img
+                                  src={tech.icon}
+                                  alt={tech.name}
+                                  className="w-5 h-5 object-contain group-hover:scale-110 transition-transform"
+                                />
+                                <span className="text-sm font-medium text-[#e4e4e7]">
+                                  {tech.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+            </m.div>
+          </m.div>
+        )}
+      </AnimatePresence>
+    </MotionProvider>
   );
 };
 

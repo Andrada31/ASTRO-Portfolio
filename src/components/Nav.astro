@@ -37,7 +37,7 @@ const navItems = [
                 class="nav-link flex flex-col items-center justify-center relative rounded-full bg-gray-200 dark:bg-neutral-800 transition-all duration-300 hover:scale-110"
                 data-title={item.label}
               >
-                <div class="nav-tooltip absolute left-full -translate-y-1/2 ml-2 px-2 py-1 bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-md text-xs whitespace-nowrap text-neutral-700 dark:text-white opacity-0 pointer-events-none transition-all duration-200 md:block hidden">
+                <div class="nav-tooltip absolute left-full -translate-y-1/2 ml-2 px-2 py-1 bg-gray-100 dark:bg-neutral-800 rounded-md text-xs whitespace-nowrap text-neutral-700 dark:text-white opacity-0 pointer-events-none transition-all duration-200 md:block hidden">
                   {item.label}
                 </div>
                 <span class="nav-icon flex items-center justify-center text-neutral-600 dark:text-neutral-300">
@@ -74,34 +74,22 @@ const navItems = [
 
 <style>
   .floating-dock-nav {
-    background: #121212;
-    border: 1px solid #2b2b2b;
+    background: var(--surface-1);
     border-radius: 9999px;
     /* transform: translateX(-50%); */
     transition:
       width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
       background 0.3s,
-      border-color 0.3s,
       border-radius 0.3s,
       backdrop-filter 0.3s,
       transform 0.3s;
   }
 
-  .dark .floating-dock-nav {
-    background: transparent;
-    border-color: rgba(64, 64, 64, 0.3);
-  }
-
+  /* Translucent so the blur shows through, but toned enough to stand off the page. */
   .floating-dock-nav.scrolling {
-    background: transparent;
-    border-color: rgba(229, 231, 235, 0.5);
+    background: color-mix(in srgb, var(--surface-1) 75%, transparent);
     border-radius: 9999px;
     backdrop-filter: blur(20px);
-  }
-
-  .dark .floating-dock-nav.scrolling {
-    background: transparent;
-    border-color: rgba(64, 64, 64, 0.5);
   }
 
   /* Desktop Navigation Styles */
@@ -134,7 +122,6 @@ const navItems = [
     }
     .nav-link.active {
       background: white;
-      border: 1px solid #121212;
     }
     .nav-link.active .nav-icon {
       color: #121212;

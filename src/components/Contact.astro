@@ -1,4 +1,4 @@
-<section id="contact" class="w-full py-12 border-t border-[#ffffff10]">
+<section id="contact" class="w-full py-12 md:py-20">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Let's talk</h2>
     <h3 class="text-4xl md:text-5xl font-medium text-[var(--white)] mb-6">
@@ -25,25 +25,25 @@
             name="from_name"
             placeholder="Name"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-[var(--surface-2)] text-[var(--white)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
           />
           <input
             type="email"
             name="reply_to"
             placeholder="Email"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-[var(--surface-2)] text-[var(--white)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
           />
           <textarea
             name="message"
             placeholder="Message"
             rows="6"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
+            class="px-4 py-2 bg-[var(--surface-2)] text-[var(--white)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
           ></textarea>
           <button
             type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
+            class="px-4 py-2 bg-[var(--surface-3)] text-[var(--white-icon)] rounded-lg transition-colors hover:bg-[var(--surface-4)] hover:text-[var(--white)]"
           >
             Submit
           </button>
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div id="toast" class="fixed bottom-4 right-4 bg-[#1414149c] backdrop-blur-md border border-[var(--sec)] text-[var(--white)] px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-y-20 opacity-0 z-50 pointer-events-none flex items-center gap-2">
+  <div id="toast" class="fixed bottom-4 right-4 bg-[var(--accent)] text-[var(--white)] px-4 py-3 rounded-lg transform transition-all duration-300 translate-y-20 opacity-0 z-50 pointer-events-none flex items-center gap-2">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--sec)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>

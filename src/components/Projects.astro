@@ -1,13 +1,23 @@
 ---
-
+import { getImage } from "astro:assets";
 import ProjectCard from "@/React/ProjectCard";
+import s5 from "@/assets/projects/s5.png";
+import s3 from "@/assets/projects/s3.png";
+import b1 from "@/assets/projects/b1.png";
+import japan from "@/assets/projects/japan.png";
 
-
+// Cards render at ~440px wide, so 900px covers 2x screens
+const [s5Src, s3Src, b1Src, japanSrc] = await Promise.all(
+  [s5, s3, b1, japan].map(async (src) => {
+    const image = await getImage({ src, width: 900, format: "webp" });
+    return image.src;
+  }),
+);
 ---
 
 <section
   id="projects"
-  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
+  class="py-12 md:py-20 text-[var(--white)]"
 >
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
@@ -18,10 +28,10 @@ import ProjectCard from "@/React/ProjectCard";
     >
       <div class="flex justify-center md:justify-start">
         <ProjectCard
-          client:load
+          client:visible={{ rootMargin: "200px" }}
           text_m="Transfer Learning in Astronomy"
           text_s="Local"
-          image="/ASTRO-Portfolio/png/s5.png"
+          image={s5Src}
           logo="/ASTRO-Portfolio/svg/TensorFlow.svg"
           codeLink="https://github.com/Andrada31/Transfer-Learning-in-Astronomy"
           externalLink="https://kaggle.com/writeups/andradaparaczki/transfer-learning-in-the-detection-and-classificat"
@@ -41,10 +51,10 @@ import ProjectCard from "@/React/ProjectCard";
       </div>
       <div class="flex justify-center md:justify-start">
         <ProjectCard
-          client:load
+          client:visible={{ rootMargin: "200px" }}
           text_m="NEXUS Ecosystem"
           text_s="LIVE"
-          image="/ASTRO-Portfolio/png/s3.png"
+          image={s3Src}
           logo="/ASTRO-Portfolio/svg/react.svg"
           codeLink="https://nexus.e-uvt.ro/"
           externalLink="https://nexus.e-uvt.ro/"
@@ -64,10 +74,10 @@ import ProjectCard from "@/React/ProjectCard";
       </div>
       <div class="flex justify-center md:justify-start">
         <ProjectCard
-          client:load
+          client:visible={{ rootMargin: "200px" }}
           text_m="Blackboard"
           text_s="In progress.."
-          image="/ASTRO-Portfolio/png/b1.png"
+          image={b1Src}
           logo="/ASTRO-Portfolio/svg/next.svg"
           codeLink="https://github.com/Andrada31/Blackboard"
           externalLink="#"
@@ -86,10 +96,10 @@ import ProjectCard from "@/React/ProjectCard";
       </div>
       <div class="flex justify-center md:justify-start">
         <ProjectCard
-          client:load
+          client:visible={{ rootMargin: "200px" }}
           text_m="Japan Parallax"
           text_s="Demo"
-          image="/ASTRO-Portfolio/png/japan.png"
+          image={japanSrc}
           logo="/ASTRO-Portfolio/svg/HTML5.svg"
           codeLink="https://github.com/Andrada31/Japan-Parallax"
           externalLink="#"
@@ -109,7 +119,7 @@ import ProjectCard from "@/React/ProjectCard";
       target="_blank"
       href="https://github.com/Andrada31"
       aria-label="GitHub"
-      class="w-full flex items-center justify-center gap-2 mt-14 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full hover:bg-[var(--white-icon-tr)] hover:scale-105"
+      class="w-full flex items-center justify-center gap-2 mt-14 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out bg-[var(--surface-2)] p-3 rounded-full hover:bg-[var(--surface-3)] hover:scale-105"
     >
       <span class="md:text-lg text-md">More projects on</span>
       <svg

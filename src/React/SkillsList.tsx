@@ -1,4 +1,29 @@
 import { useState } from "react";
+import { m, type Variants } from "framer-motion";
+import MotionProvider from "./MotionProvider";
+
+const panelVariants: Variants = {
+  open: {
+    height: "auto",
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut",
+      staggerChildren: 0.06,
+      delayChildren: 0.1,
+    },
+  },
+  closed: {
+    height: 0,
+    opacity: 0,
+    transition: { duration: 0.25, ease: "easeIn" },
+  },
+};
+
+const itemVariants: Variants = {
+  open: { opacity: 1, x: 0 },
+  closed: { opacity: 0, x: -8 },
+};
 
 const CategoryIcons = {
   "Web Development": (
@@ -61,57 +86,64 @@ const SkillsList = () => {
   };
 
   return (
-    <div className="text-left pt-3 md:pt-9">
-      <h3 className="text-[var(--white)] text-3xl md:text-4xl font-semibold md:mb-6">
-        What I do?
-      </h3>
-      <ul className="space-y-4 mt-4 text-lg">
-        {Object.entries(skills).map(([category, items]) => (
-          <li key={category} className="w-full">
-            <div
-              onClick={() => toggleItem(category)}
-              className="md:w-[400px] w-full bg-[#1414149c] rounded-2xl text-left hover:bg-opacity-80 transition-all border border-[var(--white-icon-tr)] cursor-pointer overflow-hidden"
-            >
-              <div className="flex items-center gap-3 p-4">
-                {CategoryIcons[category]}
-                <div className="flex items-center gap-2 flex-grow justify-between">
-                  <div className="min-w-0 max-w-[200px] md:max-w-none overflow-hidden">
-                    <span className="block truncate text-[var(--white)] text-lg">
-                      {category}
-                    </span>
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className={`w-6 h-6 text-[var(--white)] transform transition-transform flex-shrink-0 ${openItem === category ? "rotate-180" : ""
-                      }`}
-                  >
-                    <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
-                  </svg>
-                </div>
-              </div>
-
+    <MotionProvider>
+      <div className="text-left pt-3 md:pt-9">
+        <h3 className="text-[var(--white)] text-3xl md:text-4xl font-semibold md:mb-6">
+          What I do?
+        </h3>
+        <ul className="space-y-4 mt-4 text-lg">
+          {Object.entries(skills).map(([category, items]) => (
+            <li key={category} className="w-full">
               <div
-                className={`transition-all duration-300 px-4 ${openItem === category
-                  ? "max-h-[500px] pb-4 opacity-100"
-                  : "max-h-0 opacity-0"
-                  }`}
+                onClick={() => toggleItem(category)}
+                className="md:w-[400px] w-full bg-[var(--surface-1)] rounded-2xl text-left hover:bg-[var(--surface-2)] transition-colors cursor-pointer overflow-hidden"
               >
-                <ul className="space-y-2 text-[var(--white-icon)] text-sm">
-                  {items.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <span className="pl-1">•</span>
-                      <li className="pl-3">{item}</li>
+                <div className="flex items-center gap-3 p-4">
+                  {CategoryIcons[category]}
+                  <div className="flex items-center gap-2 flex-grow justify-between">
+                    <div className="min-w-0 max-w-[200px] md:max-w-none overflow-hidden">
+                      <span className="block truncate text-[var(--white)] text-lg">
+                        {category}
+                      </span>
                     </div>
-                  ))}
-                </ul>
+                    <m.svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-6 h-6 text-[var(--white)] flex-shrink-0"
+                      animate={{ rotate: openItem === category ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path>
+                    </m.svg>
+                  </div>
+                </div>
+
+                <m.div
+                  className="px-4 overflow-hidden"
+                  initial={false}
+                  animate={openItem === category ? "open" : "closed"}
+                  variants={panelVariants}
+                >
+                  <ul className="space-y-2 text-[var(--white-icon)] text-sm pb-4">
+                    {items.map((item, index) => (
+                      <m.li
+                        key={index}
+                        variants={itemVariants}
+                        className="flex items-center"
+                      >
+                        <span className="pl-1">•</span>
+                        <span className="pl-3">{item}</span>
+                      </m.li>
+                    ))}
+                  </ul>
+                </m.div>
               </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </MotionProvider>
   );
 };
 

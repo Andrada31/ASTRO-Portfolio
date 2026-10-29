@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Lottie from "lottie-react";
+import React, { useEffect, useRef } from "react";
+import type { AnimationItem } from "lottie-web";
 
 interface LottieAnimationProps {
   path?: string; // Optional: allow custom path, default to /transformer.json
@@ -18,26 +18,34 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({
   autoplay = true,
   style = {},
 }) => {
-  const [animationData, setAnimationData] = useState<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch(path)
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, [path]);
+    let animation: AnimationItem | undefined;
+    let cancelled = false;
 
-  return (
-    <div style={{ width, height, ...style }}>
-      {animationData && (
-        <Lottie
-          animationData={animationData}
-          loop={loop}
-          autoplay={autoplay}
-          style={{ width: "100%", height: "100%" }}
-        />
-      )}
-    </div>
-  );
+    // Load the SVG-only player and the animation data in parallel
+    Promise.all([
+      import("lottie-web/build/player/lottie_light"),
+      fetch(path).then((res) => res.json()),
+    ]).then(([{ default: lottie }, animationData]) => {
+      if (cancelled || !containerRef.current) return;
+      animation = lottie.loadAnimation({
+        container: containerRef.current,
+        renderer: "svg",
+        loop,
+        autoplay,
+        animationData,
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      animation?.destroy();
+    };
+  }, [path, loop, autoplay]);
+
+  return <div ref={containerRef} style={{ width, height, ...style }} />;
 };
 
 export default LottieAnimation;

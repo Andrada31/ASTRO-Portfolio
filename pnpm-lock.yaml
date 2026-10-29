@@ -17,6 +17,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^6.0.2
         version: 6.0.2(astro@5.13.5(@types/node@24.3.0)(jiti@1.21.7)(rollup@4.50.0)(typescript@5.9.2)(yaml@2.7.1))(tailwindcss@3.4.17)
+      '@fontsource-variable/montserrat':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@types/react':
         specifier: ^19.1.12
         version: 19.1.12
@@ -32,12 +35,12 @@ importers:
       firebase:
         specifier: ^12.2.1
         version: 12.2.1
-      lottie-react:
-        specifier: ^2.4.1
-        version: 2.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      ogl:
-        specifier: ^1.0.11
-        version: 1.0.11
+      framer-motion:
+        specifier: ^14.7.1
+        version: 14.7.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      lottie-web:
+        specifier: ^5.13.0
+        version: 5.13.0
       pnpm:
         specifier: ^10.17.1
         version: 10.33.4
@@ -53,9 +56,6 @@ importers:
       sharp:
         specifier: ^0.34.3
         version: 0.34.3
-      styled-components:
-        specifier: ^6.1.19
-        version: 6.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-merge:
         specifier: ^3.6.0
         version: 3.6.0
@@ -256,12 +256,6 @@ packages:
 
   '@emnapi/runtime@1.5.0':
     resolution: {integrity: sha512-97/BJ3iXHww3djw6hYIfErCZFee7qCtrneuLa20UXFCOTCfBM2cvQHjWJ2EG0s0MtdNwInarqCTz35i4wWXHsQ==}
-
-  '@emotion/is-prop-valid@1.4.0':
-    resolution: {integrity: sha512-QgD4fyscGcbbKwJmqNvUMSE02OsHUa+lAWKdEUIJKgqe5IwRSKd7+KhibEWdaKwgjLj0DRSHA9biAIqGBk05lw==}
-
-  '@emotion/memoize@0.9.0':
-    resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
 
   '@esbuild/aix-ppc64@0.25.9':
     resolution: {integrity: sha512-OaGtL73Jck6pBKjNIe24BnFE6agGl+6KxDtTfHhy1HmhthfKouEcOhqpSL64K4/0WCtbKFLOdzD/44cJ4k9opA==}
@@ -628,6 +622,9 @@ packages:
 
   '@firebase/webchannel-wrapper@1.0.4':
     resolution: {integrity: sha512-6m8+P+dE/RPl4OPzjTxcTbQ0rGeRyeTvAi9KwIffBVCiAMKrfXfLZaqD1F+m8t4B5/Q5aHsMozOgirkH1F5oMQ==}
+
+  '@fontsource-variable/montserrat@5.3.0':
+    resolution: {integrity: sha512-7PaZoxaxrWLAyrhO46v65An9LhUhfkTExWLhfbywYZCnZEgg/W1rEHnlNmZKjNZ3nJTVYyicqxlJt10z/26yTA==}
 
   '@grpc/grpc-js@1.9.15':
     resolution: {integrity: sha512-nqE7Hc0AzI+euzUwDAy0aY5hCp10r734gMGRdU+qOPX0XSceI2ULrcXB5U2xSc5VkWwalCj4M7GzCAygZl2KoQ==}
@@ -1423,9 +1420,6 @@ packages:
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
-  csstype@3.2.3:
-    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
-
   d3-array@3.2.4:
     resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==}
     engines: {node: '>=12'}
@@ -1628,6 +1622,17 @@ packages:
 
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
+
+  framer-motion@14.7.1:
+    resolution: {integrity: sha512-mFDYZxyfeZnpvL/zEQEqLZNYVA/ya47c9TBfZb/PEoNBBVSVvCLkMrCv9U38cuw72W161XENZwZB0+4nIBLEJg==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -1834,12 +1839,6 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
-  lottie-react@2.4.1:
-    resolution: {integrity: sha512-LQrH7jlkigIIv++wIyrOYFLHSKQpEY4zehPicL9bQsrt1rnoKRYCYgpCUe5maqylNtacy58/sQDZTkwMcTRxZw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
   lottie-web@5.13.0:
     resolution: {integrity: sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==}
 
@@ -1995,6 +1994,12 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
+  motion-dom@14.7.1:
+    resolution: {integrity: sha512-p9q9F7+HoijbQjUG/cSGNmWS2t1OaAKxkd2RG5gQJRoDwoTap/Khb7K1P5rLW90crnSmx0rcRXzh3Jd5UNrpEw==}
+
+  motion-utils@14.7.0:
+    resolution: {integrity: sha512-woO0/Nb7ys75f94fjvQi/6leiHGvZUYkeHUPEZ3vxsV+9OpEVhkxp01x8MlRwX0zt31EqgXsKDAoBoJLC148Tw==}
+
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
     engines: {node: '>=10'}
@@ -2061,9 +2066,6 @@ packages:
 
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
-
-  ogl@1.0.11:
-    resolution: {integrity: sha512-kUpC154AFfxi16pmZUK4jk3J+8zxwTWGPo03EoYA8QPbzikHoaC82n6pNTbd+oEaJonaE8aPWBlX7ad9zrqLsA==}
 
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
@@ -2431,25 +2433,6 @@ packages:
   strip-ansi@7.1.0:
     resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==}
     engines: {node: '>=12'}
-
-  styled-components@6.4.1:
-    resolution: {integrity: sha512-ADu2dF53esUzzM4I0ewxhxFtsDd6v4V6dNkg3vG0iFKhnt06sJneTZnRvujAosZwW0XD58IKgGMQoqri4wHRqg==}
-    engines: {node: '>= 16'}
-    peerDependencies:
-      css-to-react-native: '>= 3.2.0'
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-      react-native: '>= 0.68.0'
-    peerDependenciesMeta:
-      css-to-react-native:
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-
-  stylis@4.3.6:
-    resolution: {integrity: sha512-yQ3rwFWRfwNUY7H5vpU0wfdkNSnvnJinhF9830Swlaxl03zsOjCfmX0ugac+3LtK0lYSgwL/KXc8oYL3mG4YFQ==}
 
   sucrase@3.35.1:
     resolution: {integrity: sha512-DhuTmvZWux4H1UOnWMB3sk0sbaCVOoQZjv8u1rDoTV0HTdGem9hkAZtl4JZy8P2z4Bg0nT+YMeOFyVr4zcG5Tw==}
@@ -3215,12 +3198,6 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@emotion/is-prop-valid@1.4.0':
-    dependencies:
-      '@emotion/memoize': 0.9.0
-
-  '@emotion/memoize@0.9.0': {}
-
   '@esbuild/aix-ppc64@0.25.9':
     optional: true
 
@@ -3616,6 +3593,8 @@ snapshots:
       tslib: 2.8.1
 
   '@firebase/webchannel-wrapper@1.0.4': {}
+
+  '@fontsource-variable/montserrat@5.3.0': {}
 
   '@grpc/grpc-js@1.9.15':
     dependencies:
@@ -4431,8 +4410,6 @@ snapshots:
 
   csstype@3.1.3: {}
 
-  csstype@3.2.3: {}
-
   d3-array@3.2.4:
     dependencies:
       internmap: 2.0.3
@@ -4661,6 +4638,15 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
+  framer-motion@14.7.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      motion-dom: 14.7.1
+      motion-utils: 14.7.0
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   fsevents@2.3.3:
     optional: true
 
@@ -4872,12 +4858,6 @@ snapshots:
   long@5.3.2: {}
 
   longest-streak@3.1.0: {}
-
-  lottie-react@2.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      lottie-web: 5.13.0
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
 
   lottie-web@5.13.0: {}
 
@@ -5221,6 +5201,12 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
+  motion-dom@14.7.1:
+    dependencies:
+      motion-utils: 14.7.0
+
+  motion-utils@14.7.0: {}
+
   mrmime@2.0.1: {}
 
   ms@2.1.3: {}
@@ -5266,8 +5252,6 @@ snapshots:
       destr: 2.0.5
       node-fetch-native: 1.6.7
       ufo: 1.6.1
-
-  ogl@1.0.11: {}
 
   ohash@2.0.11: {}
 
@@ -5750,17 +5734,6 @@ snapshots:
   strip-ansi@7.1.0:
     dependencies:
       ansi-regex: 6.2.0
-
-  styled-components@6.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      '@emotion/is-prop-valid': 1.4.0
-      csstype: 3.2.3
-      react: 19.1.0
-      stylis: 4.3.6
-    optionalDependencies:
-      react-dom: 19.1.0(react@19.1.0)
-
-  stylis@4.3.6: {}
 
   sucrase@3.35.1:
     dependencies:

@@ -1,11 +1,16 @@
 ---
-import LiquidEther from "@/React/LiquidEther";
+import "@fontsource-variable/montserrat";
+import montserratLatin from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
+import { getImage } from "astro:assets";
+import LiquidBackground from "@/React/LiquidBackground";
+import faviconSrc from "@/assets/favicon.png";
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+const favicon = await getImage({ src: faviconSrc, width: 64, format: "png" });
 ---
 
 <!doctype html>
@@ -14,7 +19,14 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Web & AI Developer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={favicon.src} />
+    <link
+      rel="preload"
+      href={montserratLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta property="og:title" content="Andrada Paraczki" />
     <meta property="og:description" content="Web & AI Developer" />
     <meta property="og:url" content="https://andradaparaczki.vercel.app" />
@@ -25,26 +37,37 @@ const { title } = Astro.props;
   </head>
   <body class="bg-[--background] sm:px-28 lg:px-20 px-9">
     <div class="absolute inset-0 -z-10">
-      <LiquidEther client:load />
+      <LiquidBackground client:idle />
     </div>
     <slot />
   </body>
 </html>
 
 <style is:global>
-  @import url("https://fonts.cdnfonts.com/css/montserrat");
-
   :root {
     --background: #0c0c0c;
     --sec: #6c88da;
     --white: #dfdfdf;
     --white-icon: #f3f3f398;
     --white-icon-tr: #f3f3f310;
+
+    /*
+     * No borders: surfaces are told apart by tone alone, each step a little
+     * lighter than the one it sits on.
+     *   background → surface-1 (cards, tiles, footer, modal)
+     *   → surface-2 (controls, inputs, panels on a card) → surface-3 (hover, chips)
+     *   → surface-4 (hover on surface-3). accent = highlighted / active state.
+     */
+    --surface-1: #141414;
+    --surface-2: #1a1a1a;
+    --surface-3: #222222;
+    --surface-4: #2b2b2b;
+    --accent: color-mix(in oklab, var(--sec) 20%, var(--surface-2));
   }
 
   * {
     font-family:
-      "Montserrat",
+      "Montserrat Variable",
       -apple-system,
       system-ui,
       sans-serif;
@@ -65,22 +88,22 @@ const { title } = Astro.props;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--container);
+    background: var(--background);
     border-radius: 30px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--background);
+    background: var(--surface-3);
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--pink);
+    background: var(--surface-4);
   }
 
   /* Scrollbar styles for Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--line) var(--container);
+    scrollbar-color: var(--surface-3) transparent;
   }
 </style>

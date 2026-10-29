@@ -17,8 +17,9 @@ Personal portfolio built with Astro, React, and Tailwind CSS.
 - Tailwind CSS
 - Firebase
 - Recharts
-- Lottie React
-- Three.js and OGL
+- Lottie (lottie-web)
+- Three.js
+- Framer Motion
 
 ## Featured Projects
 
@@ -78,6 +79,7 @@ public/
      svg/
      transformer.json
 src/
+     assets/        # images optimized at build time (astro:assets)
      components/
           Contact.astro
           Footer.astro
@@ -90,11 +92,11 @@ src/
      pages/
           index.astro
      React/
-          AstronautCard.tsx
-          DarkVeil.tsx
           LikeButton.tsx
+          LiquidBackground.tsx
           LiquidEther.tsx
           LottieAnimation.tsx
+          MotionProvider.tsx
           ProjectCard.tsx
           RadarChartComponent.tsx
           SkillsList.tsx
